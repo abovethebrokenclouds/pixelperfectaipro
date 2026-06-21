@@ -68,11 +68,6 @@ function Page() {
 
       {gen.result && (
         <>
-          {gen.usedDemo && (
-            <div className="mx-auto mt-8 flex max-w-7xl justify-center px-4 sm:px-6">
-              <DemoBadge />
-            </div>
-          )}
           <ShortsGrid
             shorts={gen.result.shorts}
             platformCopy={gen.result.platformCopy}
