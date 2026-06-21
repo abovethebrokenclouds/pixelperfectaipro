@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { DemoBadge } from "@/components/auto-shorts/DemoBadge";
+
 import { EditModal } from "@/components/auto-shorts/EditModal";
 import { Faq } from "@/components/auto-shorts/Faq";
 import { Features } from "@/components/auto-shorts/Features";
@@ -68,11 +68,6 @@ function Page() {
 
       {gen.result && (
         <>
-          {gen.usedDemo && (
-            <div className="mx-auto mt-8 flex max-w-7xl justify-center px-4 sm:px-6">
-              <DemoBadge />
-            </div>
-          )}
           <ShortsGrid
             shorts={gen.result.shorts}
             platformCopy={gen.result.platformCopy}
