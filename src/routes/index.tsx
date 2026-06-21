@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { DemoBadge } from "@/components/auto-shorts/DemoBadge";
+
 import { EditModal } from "@/components/auto-shorts/EditModal";
 import { Faq } from "@/components/auto-shorts/Faq";
 import { Features } from "@/components/auto-shorts/Features";
