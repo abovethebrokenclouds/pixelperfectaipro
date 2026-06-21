@@ -6,6 +6,9 @@ import type {
   ShortPlan,
 } from "./types";
 import { demoResult } from "./demoData";
+import { generateShortsFn, variationFn } from "./shorts.functions";
+
+
 
 const SETTINGS_KEY = "auto-shorts-settings";
 
@@ -86,15 +89,14 @@ export async function generateShorts(
     return withDemoBadge(filterDemo(url, preferences), true);
   }
   try {
-    const data = await http<GenerateShortsResult>("/api/generate-shorts", {
-      method: "POST",
-      body: JSON.stringify({ url, preferences }),
-    });
+    const data = await generateShortsFn({ data: { url, preferences } });
     return withDemoBadge(data, false);
-  } catch {
+  } catch (e) {
+    console.error("generateShorts failed, falling back to demo", e);
     return withDemoBadge(filterDemo(url, preferences), true);
   }
 }
+
 
 function filterDemo(
   url: string,
@@ -122,15 +124,14 @@ export async function variation(
   const settings = loadSettings();
   if (settings.forceDemo) return withDemoBadge(localVariation(plan, instruction), true);
   try {
-    const data = await http<ShortPlan>("/api/variation", {
-      method: "POST",
-      body: JSON.stringify({ plan, instruction }),
-    });
+    const data = await variationFn({ data: { plan, instruction } });
     return withDemoBadge(data, false);
-  } catch {
+  } catch (e) {
+    console.error("variation failed, falling back to local", e);
     return withDemoBadge(localVariation(plan, instruction), true);
   }
 }
+
 
 function localVariation(plan: ShortPlan, instruction: string): ShortPlan {
   return {
